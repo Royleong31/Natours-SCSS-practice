@@ -1,0 +1,50 @@
+$gutter-vertical: 8rem;
+$gutter-horizontal: 6rem;
+$col-1-of-3-width: calc((100% - #{$gutter-horizontal}* 2) / 3);
+$col-1-of-4-width: calc((100% - #{$gutter-horizontal}* 3) / 4);
+
+.row {
+	max-width: $grid-width;
+	margin: 0 auto;
+
+	@include clearfix;
+
+	// The :last-child selector matches every element that is the last child of its parent.
+	// all rows except the last one will be selected
+	&:not(:last-child) {
+		margin-bottom: $gutter-vertical;
+	}
+
+	// ?: this means starts with 'col-'
+	[class^="col-"] {
+		float: left;
+
+		&:not(:last-child) {
+			margin-right: $gutter-horizontal;
+		}
+	}
+
+	.col-1-of-2 {
+		width: calc((100% - #{$gutter-horizontal}) / 2);
+	}
+
+	.col-1-of-3 {
+		width: $col-1-of-3-width;
+	}
+
+	.col-2-of-3 {
+		width: calc(#{$col-1-of-3-width}* 2 + #{$gutter-horizontal});
+	}
+
+	.col-1-of-4 {
+		width: $col-1-of-4-width;
+	}
+
+	.col-2-of-4 {
+		width: calc(#{$col-1-of-4-width} * 2 + #{$gutter-horizontal});
+	}
+
+	.col-3-of-4 {
+		width: calc(#{$col-1-of-4-width} * 3 + 2 *#{$gutter-horizontal});
+	}
+}
