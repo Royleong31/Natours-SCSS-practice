@@ -1,0 +1,149 @@
+.card {
+	position: relative;
+	// ?: width is set by the grid layout
+	height: 50rem; // !: Need to set the height otherwise it will be 0 because the children are position: absolute and are hence taken out of the document flow
+
+	perspective: 150rem;
+	-moz-perspective: 150rem;
+
+	&__side {
+		// !: Need to add width and height otherwise the it will collapse to fit the content as it is absolutely positioned.
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		transition: all 0.8s;
+		backface-visibility: hidden;
+
+		border-radius: 3px;
+		box-shadow: 0 1.5rem 4rem rgba(black, 0.15);
+		overflow: hidden;
+
+		&--front {
+			background: white;
+		}
+
+		&--back {
+			transform: rotateY(180deg);
+
+			&-1 {
+				background: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark);
+			}
+
+			&-2 {
+				background: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+			}
+
+			&-3 {
+				background: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark);
+			}
+		}
+	}
+
+	&:hover &__side--front {
+		transform: rotateY(-180deg);
+	}
+
+	&:hover &__side--back {
+		transform: rotateY(0);
+	}
+
+	&__picture {
+		background-size: cover;
+		height: 23rem;
+		background-blend-mode: screen;
+		border-radius: 3px 3px 0 0;
+
+		clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+		&--1 {
+			background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+				url(../img/nat-5.jpg);
+		}
+
+		&--2 {
+			background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+				url(../img/nat-6.jpg);
+		}
+
+		&--3 {
+			background-image: linear-gradient(to right bottom, $color-tertiary-light, $color-tertiary-dark),
+				url(../img/nat-7.jpg);
+		}
+	}
+
+	&__heading {
+		font-size: 2.5rem;
+		font-weight: 300;
+		text-transform: uppercase;
+		color: white;
+		position: absolute;
+		top: 12rem;
+		right: 2rem;
+		text-align: right;
+	}
+
+	// ?: Not inside the __heading block above as it is another element in BEM, not a modifier of &__heading
+	&__heading-span {
+		padding: 1rem 1.5rem;
+		box-decoration-break: clone; // ?: causes the 2 different blocks due to line wrapping to be treated as separate blocks, so there will be proper padding on the separate blocks
+
+		&--1 {
+			background: linear-gradient(rgba($color-secondary-light, 0.85), rgba($color-secondary-dark, 0.85));
+		}
+
+		&--2 {
+			background: linear-gradient(rgba($color-primary-light, 0.85), rgba($color-primary-dark, 0.85));
+		}
+
+		&--3 {
+			background: linear-gradient(rgba($color-tertiary-light, 0.85), rgba($color-tertiary-dark, 0.85));
+		}
+	}
+
+	&__details {
+		padding-top: 2rem;
+
+		ul {
+			list-style: none;
+			margin: auto;
+			width: 80%;
+
+			li {
+				text-align: center;
+				font-size: 1.5rem;
+				padding: 1rem;
+
+				&:not(:last-child) {
+					border-bottom: 1px solid $color-grey-light-2;
+				}
+			}
+		}
+	}
+
+	&__cta {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 90%;
+		text-align: center;
+	}
+
+	&__price-box {
+		color: white;
+		margin-bottom: 8rem;
+	}
+
+	&__price-only {
+		font-size: 1.4rem;
+		text-transform: uppercase;
+	}
+
+	&__price-value {
+		font-size: 6rem;
+		font-weight: 100;
+	}
+}

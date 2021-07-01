@@ -10,11 +10,7 @@
 	margin-top: -10rem;
 	// ?: moving the section by translate can also work but the space taken up by the original element is not removed, causing a large white space below
 
-	background: linear-gradient(
-			to right bottom,
-			rgba($color-primary-light, 0.8),
-			rgba($color-primary-dark, 0.8)
-		),
+	background: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)),
 		url(../../img/nat-4.jpg) center/cover;
 
 	transform: skewY(-7deg);
@@ -22,5 +18,43 @@
 	// !: If & * is used, then the transform property will be inherited by all the children, causing all of them to skewY(7deg). By using >, only the first child will be unskewed, properly removing the skew effect of the parent
 	& > * {
 		transform: skewY(7deg);
+	}
+}
+
+.section-tours {
+	background-color: $color-grey-light;
+	padding: 25rem 0 15rem 0;
+	margin-top: -10rem;
+}
+
+.section-stories {
+	padding: 15rem 0;
+	position: relative;
+}
+
+.section-book {
+	padding: 15rem 0;
+	background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+}
+
+.book {
+	// !: the address for the url needs to be from the location of the css file, not the scss file, as it will be compiled to the css file
+	background: linear-gradient(
+			105deg,
+			// ?: Sets the angle of the transition between the colors
+			rgba(white, 0.9) 50%,
+			// ?: From 50% to 50% (i.e. nothing), the colors will transition to transparent, since there is not gap, there will be a sharp line
+			transparent 50.1%
+		),
+		url("../img/nat-10.jpg") center/cover;
+	// background-size: 100%;
+	border-radius: 3px;
+	box-shadow: 0 1.5rem 4rem rgba(black, 0.2);
+
+	height: 50rem;
+
+	&__form {
+		width: 50%;
+		padding: 6rem;
 	}
 }

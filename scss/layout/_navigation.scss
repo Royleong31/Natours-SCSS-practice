@@ -1,0 +1,159 @@
+.navigation {
+	&__checkbox {
+		// ?: Clicking on the input that is linked to the checkbox via name/id will cause the checkbox to be checked. The checkbox does not need to be checked directly, as checking the label will work as well.
+		// ?: Checkbox is just here to manage the state of the navbar; opened or closed
+		display: none;
+	}
+
+	&__button {
+		position: fixed;
+		height: 7rem;
+		width: 7rem;
+		text-align: center; // ?: To center the hamburger menu. This works as the span inside is an inline-block element
+
+		z-index: 20;
+		top: 6rem;
+		right: 6rem;
+
+		border-radius: 50%;
+		background-color: white;
+		box-shadow: 0 1rem 3rem rgba(black, 0.1);
+		cursor: pointer;
+	}
+
+	&__background {
+		height: 6rem;
+		width: 6rem;
+		border-radius: 50%;
+		position: fixed;
+		top: 6.5rem;
+		right: 6.5rem;
+		background-image: radial-gradient($color-primary-light, $color-primary-dark);
+		z-index: 10;
+		transition: all 0.6s;
+	}
+
+	&__nav {
+		height: 100vh;
+		width: 0;
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 15;
+		// background-color: $color-primary;
+
+		transition: all 0.6s cubic-bezier(0.28, 0.67, 0.71, 1.1);
+		// ?: Set opacity and width to 0 to ensure that the nav list is gone
+		opacity: 0;
+		transform: translateX(-100rem);
+		// !: The links are at the right side of page, just invisible. transform is to get it out of the viewport
+	}
+
+	&__list {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		list-style: none;
+		text-align: center;
+	}
+
+	&__item {
+	}
+
+	&__link {
+		&:link,
+		&:visited {
+			background-image: linear-gradient(120deg, transparent 50%, white 50%);
+			background-size: 250%;
+			transition: all 0.4s;
+			margin: 1rem 0;
+			display: block; // ?: Need to set it as inline-block as <a> tags are inline by default so transform won't work
+
+			font-size: 3rem;
+			font-weight: 300;
+			color: white;
+			text-decoration: none;
+			text-transform: uppercase;
+
+			span {
+				margin-right: 1rem;
+				display: inline-block;
+			}
+		}
+
+		&:hover,
+		&:active {
+			background-position: 100%; // ?: Shifts the background image
+			color: $color-primary;
+			transform: translateX(1rem);
+		}
+	}
+
+	// FUNCTIONALITY
+	&__checkbox:checked ~ &__background {
+		transform: scale(80);
+	}
+
+	&__checkbox:checked ~ &__nav {
+		opacity: 1;
+		width: 100%;
+		transform: translateX(0);
+	}
+
+	// ICON
+	&__icon {
+		position: relative;
+		// margin-top: 3.3rem;
+		top: 2.4rem;
+
+		&,
+		&::before,
+		&::after {
+			width: 3rem;
+			height: 2px;
+			background-color: $color-grey-dark;
+			display: inline-block;
+		}
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			left: 0;
+
+			transition: all .2s ease;
+		}
+
+		&::before {
+			top: -0.8rem;
+      // transform-origin: right; // ?: This can specify the origin of rotation of the element
+		}
+
+		&::after {
+			top: 0.8rem;
+		}
+	}
+
+	&__button:hover &__icon::before {
+		top: -1rem;
+	}
+
+	&__button:hover &__icon::after {
+		top: 1rem;
+	}
+
+	&__checkbox:checked + &__button &__icon {
+		background-color: transparent;
+	}
+
+	&__checkbox:checked + &__button &__icon::before {
+		transform: rotate(135deg);
+		top: 0;
+	}
+
+	&__checkbox:checked + &__button &__icon::after {
+		transform: rotate(-135deg);
+		top: 0;
+	}
+}

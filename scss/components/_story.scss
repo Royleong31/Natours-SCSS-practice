@@ -1,0 +1,64 @@
+.story {
+	width: 75%;
+	margin: 0 auto;
+	padding: 6rem;
+	padding-left: 9rem;
+
+	box-shadow: 0 3rem 6rem rgba(black, 0.15);
+	background-color: rgba(white, 0.65);
+	border-radius: 3px;
+	transform: skewX(-12deg);
+
+	font-size: $default-font-size;
+
+	& > * {
+		transform: skewX(12deg);
+	}
+
+	&__shape {
+		width: 15rem;
+		height: 15rem;
+
+		float: left;
+		-webkit-shape-outside: circle(50% at 50% 50%);
+		shape-outside: circle(50% at 50% 50%);
+		// ?: shape-outside requires the element to be floated, have defined width and height. This property makes the text wrap around in a curved manner
+
+		position: relative;
+    overflow: hidden; // !: removes the white line at the right side of the image
+		clip-path: circle(50% at 50% 50%); // ?: the text will wrap around this circle
+		transform: translateX(-3rem) skewX(12deg); // ?: Move the text away from the image. Need to skewX() here as the & >* property will be overwritten here, so need to reinclude skewX(12deg) here
+	}
+
+	&__img {
+		height: 100%;
+    transition: transform .5s;
+    // ?: Can use translate to shift the image left and right
+    transform: translateX(-4rem) scale(1.4);
+	}
+
+	&__caption {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		text-align: center;
+		color: white;
+		opacity: 0;
+    text-transform: uppercase;
+
+		transform: translate(-50%, -20%);
+		transition: all .5s;
+    backface-visibility: hidden;
+	}
+
+	&:hover &__caption {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+
+	&:hover &__img {
+		filter: blur(3px) brightness(80%); // ?: Can add more than 1 filter
+    transform: scale(1) translateX(-2rem);
+	}
+}

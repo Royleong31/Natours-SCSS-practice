@@ -1,5 +1,6 @@
 .btn {
 	/* :link(not yet visited) :visited(already visited) */
+	&,
 	&:link,
 	&:visited {
 		text-decoration: none;
@@ -11,6 +12,10 @@
 		padding: 1.5rem 4rem;
 		position: relative;
 		font-size: $default-font-size;
+
+		// these styles are for button
+		cursor: pointer;
+		border: none;
 	}
 
 	&:hover {
@@ -23,7 +28,9 @@
 		}
 	}
 
-	&:active {
+	&:active,
+	&:focus {
+		outline: none;
 		transform: translateY(1px);
 		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.4);
 	}
@@ -34,6 +41,15 @@
 
 		&::after {
 			background-color: #fff;
+		}
+	}
+
+	&--primary {
+		background-color: $color-primary;
+		color: white;
+
+		&::after {
+			background-color: $color-primary;
 		}
 	}
 
