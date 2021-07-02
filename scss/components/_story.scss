@@ -11,30 +11,56 @@
 
 	font-size: $default-font-size;
 
+	@include respond(phone) {
+		transform: skewX(0);
+	}
+
 	& > * {
 		transform: skewX(12deg);
+
+		@include respond(phone) {
+			transform: skew(0);
+		}
+	}
+
+	@include respond(tab-port) {
+		width: 100%;
+		padding: 4rem;
+		padding-left: 7rem;
+		// transform: skewX(0); // ?: makes the image go above the text
 	}
 
 	&__shape {
 		width: 15rem;
 		height: 15rem;
 
-		float: left;
-		-webkit-shape-outside: circle(50% at 50% 50%);
+		float: left; // ?: This causes the text to wrap around
 		shape-outside: circle(50% at 50% 50%);
 		// ?: shape-outside requires the element to be floated, have defined width and height. This property makes the text wrap around in a curved manner
 
 		position: relative;
-    overflow: hidden; // !: removes the white line at the right side of the image
+		overflow: hidden; // !: removes the white line at the right side of the image
 		clip-path: circle(50% at 50% 50%); // ?: the text will wrap around this circle
 		transform: translateX(-3rem) skewX(12deg); // ?: Move the text away from the image. Need to skewX() here as the & >* property will be overwritten here, so need to reinclude skewX(12deg) here
+
+		@include respond(tab-port) {
+			// ?: makes the image go above the text
+			// float: none;
+			// margin: 0 auto 4rem;
+			// width: 20rem;
+			// height: 20rem;
+		}
+
+		@include respond(phone) {
+			transform: translateX(-3rem) skewX(0);
+		}
 	}
 
 	&__img {
 		height: 100%;
-    transition: transform .5s;
-    // ?: Can use translate to shift the image left and right
-    transform: translateX(-4rem) scale(1.4);
+		transition: transform 0.5s;
+		// ?: Can use translate to shift the image left and right
+		transform: translateX(-4rem) scale(1.4);
 	}
 
 	&__caption {
@@ -45,11 +71,11 @@
 		text-align: center;
 		color: white;
 		opacity: 0;
-    text-transform: uppercase;
+		text-transform: uppercase;
 
 		transform: translate(-50%, -20%);
-		transition: all .5s;
-    backface-visibility: hidden;
+		transition: all 0.5s;
+		backface-visibility: hidden;
 	}
 
 	&:hover &__caption {
@@ -59,6 +85,6 @@
 
 	&:hover &__img {
 		filter: blur(3px) brightness(80%); // ?: Can add more than 1 filter
-    transform: scale(1) translateX(-2rem);
+		transform: scale(1) translateX(-2rem);
 	}
 }
