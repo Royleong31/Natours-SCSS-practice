@@ -1,11 +1,17 @@
 .header {
 	height: 95vh;
 	background: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)),
-		url(../img/hero.jpg) top / cover;
+		url(../img/hero-small.jpg) top / cover;
 
 	z-index: 1;
 	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 	position: relative;
+
+	// ?: Uses a smaller image for screens with lower pixel density
+	@media (min-resolution: 192dpi) and (min-width: 600px), (min-width: 2000px) {
+		background: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)),
+			url(../img/hero.jpg) top / cover;
+	}
 
 	@include respond(phone) {
 		clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
